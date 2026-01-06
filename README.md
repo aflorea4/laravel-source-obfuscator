@@ -5,8 +5,8 @@ A comprehensive Laravel package for source code obfuscation using PHPBolt. Prote
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/aflorea4/laravel-source-obfuscator.svg?style=flat-square)](https://packagist.org/packages/aflorea4/laravel-source-obfuscator)
 [![Total Downloads](https://img.shields.io/packagist/dt/aflorea4/laravel-source-obfuscator.svg?style=flat-square)](https://packagist.org/packages/aflorea4/laravel-source-obfuscator)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
-[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-blue.svg?style=flat-square)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/laravel-%3E%3D9.0-red.svg?style=flat-square)](https://laravel.com)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D7.4-blue.svg?style=flat-square)](https://php.net)
+[![Laravel Version](https://img.shields.io/badge/laravel-%3E%3D8.0-red.svg?style=flat-square)](https://laravel.com)
 
 ## Features
 
@@ -22,8 +22,8 @@ A comprehensive Laravel package for source code obfuscation using PHPBolt. Prote
 
 ## Requirements
 
-- PHP >= 8.0
-- Laravel >= 9.0
+- PHP >= 7.4
+- Laravel >= 8.0
 - PHPBolt extension (`bolt.so`) - [Get it here](https://github.com/arshidkv12/phpBolt)
 
 ## Installation
