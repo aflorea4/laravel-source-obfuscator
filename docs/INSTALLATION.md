@@ -6,10 +6,10 @@ This guide will walk you through installing and configuring the Laravel Source C
 
 Before installing this package, ensure you have:
 
-- PHP >= 8.0
-- Laravel >= 9.0
-- Composer
-- PHPBolt license and installation files
+-   PHP >= 8.0
+-   Laravel >= 9.0
+-   Composer
+-   PHPBolt license and installation files
 
 ## Step-by-Step Installation
 
@@ -125,9 +125,10 @@ php artisan obfuscate:check
 ```
 
 This command will:
-- Verify PHPBolt installation
-- Show configuration summary
-- Display files that will be obfuscated
+
+-   Verify PHPBolt installation
+-   Show configuration summary
+-   Display files that will be obfuscated
 
 ### 6. Configure Include/Exclude Paths
 
@@ -235,6 +236,7 @@ Configuration Summary:
 **Problem:** `PHPBolt binary not found`
 
 **Solution:**
+
 ```bash
 # Find where phpbolt is installed
 which phpbolt
@@ -248,6 +250,7 @@ PHPBOLT_BINARY=/path/to/phpbolt
 **Problem:** `PHP Warning: PHP Startup: Unable to load dynamic library 'phpbolt.so'`
 
 **Solution:**
+
 ```bash
 # Check if phpbolt.so exists
 ls -l $(php-config --extension-dir)/phpbolt.so
@@ -264,6 +267,7 @@ sudo systemctl restart php-fpm
 **Problem:** `Permission denied when creating output directory`
 
 **Solution:**
+
 ```bash
 # Create directories with proper permissions
 mkdir -p build/obfuscated
@@ -279,6 +283,7 @@ sudo chown -R www-data:www-data build backups
 **Problem:** `PHPBolt license validation failed`
 
 **Solution:**
+
 ```bash
 # Activate PHPBolt license
 phpbolt --activate YOUR_LICENSE_KEY
@@ -333,13 +338,12 @@ If you encounter issues during installation:
 1. Check the [Troubleshooting](#troubleshooting) section
 2. Review PHPBolt documentation
 3. Open an issue on GitHub with:
-   - PHP version (`php -v`)
-   - Laravel version
-   - PHPBolt version
-   - Error messages
-   - Installation steps you followed
+    - PHP version (`php -v`)
+    - Laravel version
+    - PHPBolt version
+    - Error messages
+    - Installation steps you followed
 
 ---
 
 **Need Help?** Open an issue on [GitHub](https://github.com/alexandruflorea/laravel-source-obfuscator/issues)
-

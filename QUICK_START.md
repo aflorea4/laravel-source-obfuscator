@@ -6,7 +6,7 @@ Get started with Laravel Source Code Obfuscator in 5 minutes.
 
 ✅ PHP >= 8.0  
 ✅ Laravel >= 9.0  
-✅ PHPBolt (commercial license required)
+✅ PHPBolt
 
 ## Installation
 
@@ -14,7 +14,7 @@ Get started with Laravel Source Code Obfuscator in 5 minutes.
 
 ```bash
 # Download bolt.so for your PHP version
-wget https://github.com/arshidkv12/phpBolt/releases/download/v1.0/bolt-php$(php -r 'echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;').so -O bolt.so
+Download bolt.so file from https://phpbolt.com/ website. Then find the extension directory. You can find the extension directory by phpinfo() function. Then add extension=bolt.so in the php.ini file and restart your server.
 
 # Install extension
 sudo cp bolt.so $(php-config --extension-dir)/
@@ -62,6 +62,7 @@ php artisan obfuscate:check
 ```
 
 Expected output:
+
 ```
 PHPBolt Extension Check:
   Extension Name: bolt
@@ -135,34 +136,34 @@ Create `.github/workflows/obfuscate.yml`:
 name: Obfuscate
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [main]
 
 jobs:
-  obfuscate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-      
-      - name: Install Dependencies
-        run: composer install --no-dev
-      
-      - name: Install PHPBolt
-        run: bash install-phpbolt.sh
-      
-      - name: Obfuscate
-        run: php artisan obfuscate:run --force
-      
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: obfuscated-app
-          path: build/obfuscated/
+    obfuscate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
+
+            - name: Install Dependencies
+              run: composer install --no-dev
+
+            - name: Install PHPBolt
+              run: bash install-phpbolt.sh
+
+            - name: Obfuscate
+              run: php artisan obfuscate:run --force
+
+            - name: Upload Artifacts
+              uses: actions/upload-artifact@v3
+              with:
+                  name: obfuscated-app
+                  path: build/obfuscated/
 ```
 
 ## Commands Cheat Sheet
@@ -208,6 +209,7 @@ Error: PHPBolt extension (bolt.so) is not loaded
 ```
 
 **Fix:**
+
 ```bash
 # Check if extension is loaded
 php -m | grep bolt
@@ -226,6 +228,7 @@ Error: Permission denied when creating output directory
 ```
 
 **Fix:**
+
 ```bash
 mkdir -p build/obfuscated backups
 chmod -R 775 build backups
@@ -234,6 +237,7 @@ chmod -R 775 build backups
 ### ❌ Files Not Obfuscated
 
 **Fix:** Check your include/exclude paths:
+
 ```bash
 php artisan obfuscate:check --show-files
 ```
@@ -242,19 +246,19 @@ php artisan obfuscate:check --show-files
 
 ### ✅ DO
 
-- ✅ Test with `--dry-run` first
-- ✅ Exclude Blade templates (`*.blade.php`)
-- ✅ Keep backups enabled
-- ✅ Review obfuscation reports
-- ✅ Test obfuscated code before deploying
+-   ✅ Test with `--dry-run` first
+-   ✅ Exclude Blade templates (`*.blade.php`)
+-   ✅ Keep backups enabled
+-   ✅ Review obfuscation reports
+-   ✅ Test obfuscated code before deploying
 
 ### ❌ DON'T
 
-- ❌ Don't scramble function/class names initially
-- ❌ Don't obfuscate Blade templates
-- ❌ Don't commit PHPBolt license to git
-- ❌ Don't deploy without testing
-- ❌ Don't disable backups in production
+-   ❌ Don't scramble function/class names initially
+-   ❌ Don't obfuscate Blade templates
+-   ❌ Don't commit PHPBolt license to git
+-   ❌ Don't deploy without testing
+-   ❌ Don't disable backups in production
 
 ## Example Workflow
 
@@ -303,11 +307,10 @@ rsync -avz build/obfuscated/ user@server:/var/www/html/
 
 ## Need Help?
 
-- 📫 [Open an Issue](https://github.com/alexandruflorea/laravel-source-obfuscator/issues)
-- 📚 [Read the Docs](README.md)
-- 💬 [Discussions](https://github.com/alexandruflorea/laravel-source-obfuscator/discussions)
+-   📫 [Open an Issue](https://github.com/alexandruflorea/laravel-source-obfuscator/issues)
+-   📚 [Read the Docs](README.md)
+-   💬 [Discussions](https://github.com/alexandruflorea/laravel-source-obfuscator/discussions)
 
 ---
 
 **🎉 You're ready to obfuscate!** Start with a dry run and work your way up.
-
