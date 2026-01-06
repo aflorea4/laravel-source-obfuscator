@@ -79,8 +79,8 @@ class ObfuscateCommand extends Command
 
             // Build options with command-line overrides
             $options = [
-                'dry_run' => $this->option('dry-run'),
-                'skip_backup' => $this->option('skip_backup'),
+                'dry_run' => $this->option('dry-run') ?? false,
+                'skip_backup' => $this->option('skip-backup') ?? false,
             ];
 
             // Override source paths if provided
