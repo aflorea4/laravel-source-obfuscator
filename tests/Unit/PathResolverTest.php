@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Tests\Unit;
+namespace Aflorea4\LaravelSourceObfuscator\Tests\Unit;
 
-use AlexandruFlorea\LaravelSourceObfuscator\Tests\TestCase;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\PathResolver;
+use Aflorea4\LaravelSourceObfuscator\Tests\TestCase;
+use Aflorea4\LaravelSourceObfuscator\Utilities\PathResolver;
 
 class PathResolverTest extends TestCase
 {

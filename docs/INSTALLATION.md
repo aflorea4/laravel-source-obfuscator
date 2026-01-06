@@ -93,7 +93,7 @@ composer require aflorea4/laravel-source-obfuscator
 Publish the configuration file:
 
 ```bash
-php artisan vendor:publish --provider="AlexandruFlorea\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Aflorea4\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config"
 ```
 
 This creates `config/obfuscator.php`.
@@ -308,7 +308,7 @@ composer update alexandruflorea/laravel-source-obfuscator
 After updating, republish the configuration if there are new options:
 
 ```bash
-php artisan vendor:publish --provider="AlexandruFlorea\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config" --force
+php artisan vendor:publish --provider="Aflorea4\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config" --force
 ```
 
 ## Uninstallation

@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Console\Commands;
+namespace Aflorea4\LaravelSourceObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\PathResolver;
+use Aflorea4\LaravelSourceObfuscator\Utilities\PathResolver;
 
 class ObfuscateClearCommand extends Command
 {

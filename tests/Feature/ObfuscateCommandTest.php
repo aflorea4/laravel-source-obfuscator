@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Tests\Feature;
+namespace Aflorea4\LaravelSourceObfuscator\Tests\Feature;
 
-use AlexandruFlorea\LaravelSourceObfuscator\Tests\TestCase;
+use Aflorea4\LaravelSourceObfuscator\Tests\TestCase;
 use Illuminate\Support\Facades\Artisan;
 
 class ObfuscateCommandTest extends TestCase

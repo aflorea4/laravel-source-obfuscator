@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Services;
+namespace Aflorea4\LaravelSourceObfuscator\Services;
 
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\FileScanner;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\PathResolver;
+use Aflorea4\LaravelSourceObfuscator\Utilities\FileScanner;
+use Aflorea4\LaravelSourceObfuscator\Utilities\PathResolver;
 use Illuminate\Support\Facades\Log;
 
 class ObfuscationService

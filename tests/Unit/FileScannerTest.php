@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Tests\Unit;
+namespace Aflorea4\LaravelSourceObfuscator\Tests\Unit;
 
-use AlexandruFlorea\LaravelSourceObfuscator\Tests\TestCase;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\FileScanner;
+use Aflorea4\LaravelSourceObfuscator\Tests\TestCase;
+use Aflorea4\LaravelSourceObfuscator\Utilities\FileScanner;
 
 class FileScannerTest extends TestCase
 {

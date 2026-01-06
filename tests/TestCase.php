@@ -1,8 +1,8 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Tests;
+namespace Aflorea4\LaravelSourceObfuscator\Tests;
 
-use AlexandruFlorea\LaravelSourceObfuscator\ObfuscatorServiceProvider;
+use Aflorea4\LaravelSourceObfuscator\ObfuscatorServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 abstract class TestCase extends Orchestra

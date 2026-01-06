@@ -1,11 +1,11 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Console\Commands;
+namespace Aflorea4\LaravelSourceObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use AlexandruFlorea\LaravelSourceObfuscator\Services\ObfuscationService;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\FileScanner;
-use AlexandruFlorea\LaravelSourceObfuscator\Utilities\PathResolver;
+use Aflorea4\LaravelSourceObfuscator\Services\ObfuscationService;
+use Aflorea4\LaravelSourceObfuscator\Utilities\FileScanner;
+use Aflorea4\LaravelSourceObfuscator\Utilities\PathResolver;
 
 class ObfuscateCheckCommand extends Command
 {

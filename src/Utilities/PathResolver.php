@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Utilities;
+namespace Aflorea4\LaravelSourceObfuscator\Utilities;
 
 class PathResolver
 {

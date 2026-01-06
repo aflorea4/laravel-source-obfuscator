@@ -61,7 +61,7 @@ php -m | grep bolt
 ### 3. Publish Configuration
 
 ```bash
-php artisan vendor:publish --provider="AlexandruFlorea\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Aflorea4\LaravelSourceObfuscator\ObfuscatorServiceProvider" --tag="config"
 ```
 
 This will create `config/obfuscator.php` in your Laravel application.

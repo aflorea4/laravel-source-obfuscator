@@ -27,18 +27,18 @@
     },
     "autoload": {
         "psr-4": {
-            "AlexandruFlorea\\LaravelSourceObfuscator\\": "src/"
+            "Aflorea4\\LaravelSourceObfuscator\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AlexandruFlorea\\LaravelSourceObfuscator\\Tests\\": "tests/"
+            "Aflorea4\\LaravelSourceObfuscator\\Tests\\": "tests/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "AlexandruFlorea\\LaravelSourceObfuscator\\ObfuscatorServiceProvider"
+                "Aflorea4\\LaravelSourceObfuscator\\ObfuscatorServiceProvider"
             ]
         }
     },

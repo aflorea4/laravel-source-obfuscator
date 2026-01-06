@@ -1,13 +1,13 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator;
+namespace Aflorea4\LaravelSourceObfuscator;
 
 use Illuminate\Support\ServiceProvider;
-use AlexandruFlorea\LaravelSourceObfuscator\Console\Commands\ObfuscateCommand;
-use AlexandruFlorea\LaravelSourceObfuscator\Console\Commands\ObfuscateCheckCommand;
-use AlexandruFlorea\LaravelSourceObfuscator\Console\Commands\ObfuscateClearCommand;
-use AlexandruFlorea\LaravelSourceObfuscator\Console\Commands\ObfuscateStatusCommand;
-use AlexandruFlorea\LaravelSourceObfuscator\Services\ObfuscationService;
+use Aflorea4\LaravelSourceObfuscator\Console\Commands\ObfuscateCommand;
+use Aflorea4\LaravelSourceObfuscator\Console\Commands\ObfuscateCheckCommand;
+use Aflorea4\LaravelSourceObfuscator\Console\Commands\ObfuscateClearCommand;
+use Aflorea4\LaravelSourceObfuscator\Console\Commands\ObfuscateStatusCommand;
+use Aflorea4\LaravelSourceObfuscator\Services\ObfuscationService;
 
 class ObfuscatorServiceProvider extends ServiceProvider
 {

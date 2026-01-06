@@ -1,9 +1,9 @@
 <?php
 
-namespace AlexandruFlorea\LaravelSourceObfuscator\Console\Commands;
+namespace Aflorea4\LaravelSourceObfuscator\Console\Commands;
 
 use Illuminate\Console\Command;
-use AlexandruFlorea\LaravelSourceObfuscator\Services\ObfuscationService;
+use Aflorea4\LaravelSourceObfuscator\Services\ObfuscationService;
 
 class ObfuscateCommand extends Command
 {
