@@ -1,0 +1,30 @@
+* text=auto eol=lf
+
+*.php diff=php
+
+# Archives
+*.7z binary
+*.jar binary
+*.rar binary
+*.zip binary
+*.tar binary
+*.gz binary
+*.bz2 binary
+
+# Ignore in exports
+/.github export-ignore
+/tests export-ignore
+/docs export-ignore
+.editorconfig export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+phpunit.xml export-ignore
+CONTRIBUTING.md export-ignore
+GETTING_STARTED_AS_MAINTAINER.md export-ignore
+IMPLEMENTATION_FIX.md export-ignore
+PACKAGE_OVERVIEW.md export-ignore
+PACKAGE_READY.md export-ignore
+PROJECT_SUMMARY.md export-ignore
+REWRITE_SUMMARY.md export-ignore
+STRUCTURE.txt export-ignore
+

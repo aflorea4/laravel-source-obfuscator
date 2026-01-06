@@ -1,0 +1,51 @@
+name: Publish Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
+      
+      - name: Run tests
+        run: vendor/bin/phpunit
+      
+      - name: Validate composer.json
+        run: composer validate --strict
+      
+      - name: Create archive
+        run: |
+          mkdir -p release
+          rsync -av --exclude='tests' --exclude='.git' --exclude='.github' --exclude='release' . release/
+          cd release
+          zip -r ../aflorea4-laravel-source-obfuscator-${{ github.event.release.tag_name }}.zip .
+      
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./aflorea4-laravel-source-obfuscator-${{ github.event.release.tag_name }}.zip
+          asset_name: aflorea4-laravel-source-obfuscator-${{ github.event.release.tag_name }}.zip
+          asset_content_type: application/zip
+      
+      - name: Trigger Packagist update
+        run: |
+          curl -XPOST -H'content-type:application/json' \
+            'https://packagist.org/api/update-package?username=${{ secrets.PACKAGIST_USERNAME }}&apiToken=${{ secrets.PACKAGIST_TOKEN }}' \
+            -d'{"repository":{"url":"https://github.com/${{ github.repository }}"}}'
+

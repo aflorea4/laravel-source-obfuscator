@@ -1,0 +1,48 @@
+{
+    "name": "aflorea4/laravel-source-obfuscator",
+    "description": "A Laravel package for source code obfuscation using PHPBolt extension",
+    "type": "library",
+    "keywords": ["laravel", "obfuscation", "phpbolt", "source code protection", "encryption", "bolt", "php-obfuscator"],
+    "license": "MIT",
+    "homepage": "https://github.com/aflorea4/laravel-source-obfuscator",
+    "authors": [
+        {
+            "name": "Alexandru Florea",
+            "email": "alexandru@aflorea.dev",
+            "homepage": "https://github.com/aflorea4"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/aflorea4/laravel-source-obfuscator/issues",
+        "source": "https://github.com/aflorea4/laravel-source-obfuscator"
+    },
+    "require": {
+        "php": "^8.0",
+        "illuminate/support": "^9.0|^10.0|^11.0",
+        "illuminate/console": "^9.0|^10.0|^11.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0|^10.0",
+        "orchestra/testbench": "^7.0|^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "AlexandruFlorea\\LaravelSourceObfuscator\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AlexandruFlorea\\LaravelSourceObfuscator\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AlexandruFlorea\\LaravelSourceObfuscator\\ObfuscatorServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
+
