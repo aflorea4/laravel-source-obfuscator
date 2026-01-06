@@ -137,8 +137,7 @@ class ObfuscateCommand extends Command
                 ['Include Paths', implode(', ', $config['include_paths'])],
                 ['Backup Enabled', $config['backup']['enabled'] ? 'Yes' : 'No'],
                 ['Strip Comments', $config['obfuscation']['strip_comments'] ? 'Yes' : 'No'],
-                ['Encode Strings', $config['obfuscation']['encode_strings'] ? 'Yes' : 'No'],
-                ['Encrypt Code', $config['obfuscation']['encrypt'] ? 'Yes' : 'No'],
+                ['Strip Whitespace', $config['obfuscation']['strip_whitespace'] ? 'Yes' : 'No'],
             ]
         );
 
