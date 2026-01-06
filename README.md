@@ -23,7 +23,7 @@ A comprehensive Laravel package for source code obfuscation using PHPBolt. Prote
 ## Requirements
 
 -   PHP >= 7.4
--   Laravel >= 8.0
+-   Laravel >= 8.0 (8.x, 9.x, 10.x, 11.x, 12.x)
 -   PHPBolt extension (`bolt.so`) - [Get it here](https://github.com/arshidkv12/phpBolt)
 
 ## Installation

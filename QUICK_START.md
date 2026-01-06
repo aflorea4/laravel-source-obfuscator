@@ -5,7 +5,7 @@ Get started with Laravel Source Code Obfuscator in 5 minutes.
 ## Prerequisites
 
 ✅ PHP >= 7.4  
-✅ Laravel >= 8.0  
+✅ Laravel >= 8.0 (8.x, 9.x, 10.x, 11.x, 12.x)  
 ✅ PHPBolt
 
 ## Installation
