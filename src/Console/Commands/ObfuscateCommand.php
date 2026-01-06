@@ -17,8 +17,7 @@ class ObfuscateCommand extends Command
                             {--destination= : Override output directory}
                             {--dry-run : Run without actually obfuscating files}
                             {--skip-backup : Skip creating a backup}
-                            {--force : Force obfuscation without confirmation}
-                            {--verbose : Display detailed output}';
+                            {--force : Force obfuscation without confirmation}';
 
     /**
      * The console command description.

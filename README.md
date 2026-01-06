@@ -211,7 +211,7 @@ php artisan obfuscate:run
 -   `--dry-run` - Simulate obfuscation without modifying files
 -   `--skip-backup` - Skip creating a backup
 -   `--force` - Skip confirmation prompt
--   `--verbose` - Display detailed output
+-   `-v|vv|vvv` - Increase verbosity (Laravel built-in)
 
 **Examples:**
 
