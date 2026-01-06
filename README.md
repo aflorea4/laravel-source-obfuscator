@@ -10,21 +10,21 @@ A comprehensive Laravel package for source code obfuscation using PHPBolt. Prote
 
 ## Features
 
-- 🔒 **PHPBolt Integration** - Uses PHPBolt engine for professional-grade obfuscation
-- ⚙️ **Highly Configurable** - Extensive configuration options for fine-tuned control
-- 📁 **Smart File Selection** - Include/exclude patterns for precise file targeting
-- 🔄 **Automatic Backups** - Create backups before obfuscation with rotation
-- 🚀 **CI/CD Ready** - Designed for seamless integration into deployment pipelines
-- 📊 **Detailed Reporting** - Generate comprehensive obfuscation reports
-- 🎯 **Multiple Commands** - CLI commands for various obfuscation tasks
-- ⚡ **Performance Optimized** - Parallel processing support for large codebases
-- 🛡️ **Safe Operation** - Dry-run mode and validation checks
+-   🔒 **PHPBolt Integration** - Uses PHPBolt engine for professional-grade obfuscation
+-   ⚙️ **Highly Configurable** - Extensive configuration options for fine-tuned control
+-   📁 **Smart File Selection** - Include/exclude patterns for precise file targeting
+-   🔄 **Automatic Backups** - Create backups before obfuscation with rotation
+-   🚀 **CI/CD Ready** - Designed for seamless integration into deployment pipelines
+-   📊 **Detailed Reporting** - Generate comprehensive obfuscation reports
+-   🎯 **Multiple Commands** - CLI commands for various obfuscation tasks
+-   ⚡ **Performance Optimized** - Parallel processing support for large codebases
+-   🛡️ **Safe Operation** - Dry-run mode and validation checks
 
 ## Requirements
 
-- PHP >= 7.4
-- Laravel >= 8.0
-- PHPBolt extension (`bolt.so`) - [Get it here](https://github.com/arshidkv12/phpBolt)
+-   PHP >= 7.4
+-   Laravel >= 8.0
+-   PHPBolt extension (`bolt.so`) - [Get it here](https://github.com/arshidkv12/phpBolt)
 
 ## Installation
 
@@ -155,7 +155,7 @@ The package configuration file (`config/obfuscator.php`) provides extensive opti
 'obfuscation' => [
     'strip_comments' => true,        // Remove comments before encryption
     'strip_whitespace' => true,      // Remove unnecessary whitespace
-    // Note: String encoding, variable scrambling, integrity checks, 
+    // Note: String encoding, variable scrambling, integrity checks,
     // and encryption are handled by bolt_encrypt() automatically
 ],
 ```
@@ -205,12 +205,13 @@ php artisan obfuscate:run
 ```
 
 **Options:**
-- `--source=path` - Override source paths (can be used multiple times: `--source=app --source=routes`)
-- `--destination=path` - Override output directory
-- `--dry-run` - Simulate obfuscation without modifying files
-- `--skip-backup` - Skip creating a backup
-- `--force` - Skip confirmation prompt
-- `--verbose` - Display detailed output
+
+-   `--source=path` - Override source paths (can be used multiple times: `--source=app --source=routes`)
+-   `--destination=path` - Override output directory
+-   `--dry-run` - Simulate obfuscation without modifying files
+-   `--skip-backup` - Skip creating a backup
+-   `--force` - Skip confirmation prompt
+-   `--verbose` - Display detailed output
 
 **Examples:**
 
@@ -243,7 +244,8 @@ php artisan obfuscate:check
 ```
 
 **Options:**
-- `--show-files` - Display complete list of files that will be obfuscated
+
+-   `--show-files` - Display complete list of files that will be obfuscated
 
 **Example:**
 
@@ -260,7 +262,8 @@ php artisan obfuscate:status
 ```
 
 **Options:**
-- `--report` - Display the last obfuscation report
+
+-   `--report` - Display the last obfuscation report
 
 **Example:**
 
@@ -277,9 +280,10 @@ php artisan obfuscate:clear
 ```
 
 **Options:**
-- `--output` - Clear only the output directory
-- `--backups` - Clear only backup directories
-- `--force` - Skip confirmation prompt
+
+-   `--output` - Clear only the output directory
+-   `--backups` - Clear only backup directories
+-   `--force` - Skip confirmation prompt
 
 **Examples:**
 
@@ -302,71 +306,71 @@ php artisan obfuscate:clear --backups --force
 name: Deploy with Obfuscation
 
 on:
-  push:
-    branches: [ main ]
+    push:
+        branches: [main]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          
-      - name: Install Dependencies
-        run: composer install --no-dev --optimize-autoloader
-        
-      - name: Install PHPBolt
-        run: |
-          # Install PHPBolt (adjust based on your setup)
-          wget https://your-phpbolt-url/phpbolt-installer.sh
-          bash phpbolt-installer.sh
-          
-      - name: Check Obfuscation Setup
-        run: php artisan obfuscate:check
-        
-      - name: Obfuscate Source Code
-        run: php artisan obfuscate:run --force
-        
-      - name: Upload Obfuscated Code
-        uses: actions/upload-artifact@v3
-        with:
-          name: obfuscated-application
-          path: build/obfuscated/
-          
-      - name: Upload Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: obfuscation-report
-          path: build/obfuscation-report.json
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: "8.2"
+
+            - name: Install Dependencies
+              run: composer install --no-dev --optimize-autoloader
+
+            - name: Install PHPBolt
+              run: |
+                  # Install PHPBolt (adjust based on your setup)
+                  wget https://your-phpbolt-url/phpbolt-installer.sh
+                  bash phpbolt-installer.sh
+
+            - name: Check Obfuscation Setup
+              run: php artisan obfuscate:check
+
+            - name: Obfuscate Source Code
+              run: php artisan obfuscate:run --force
+
+            - name: Upload Obfuscated Code
+              uses: actions/upload-artifact@v3
+              with:
+                  name: obfuscated-application
+                  path: build/obfuscated/
+
+            - name: Upload Report
+              uses: actions/upload-artifact@v3
+              with:
+                  name: obfuscation-report
+                  path: build/obfuscation-report.json
 ```
 
 ### GitLab CI Example
 
 ```yaml
 stages:
-  - build
-  - obfuscate
-  - deploy
+    - build
+    - obfuscate
+    - deploy
 
 obfuscate:
-  stage: obfuscate
-  image: php:8.2
-  before_script:
-    - composer install --no-dev --optimize-autoloader
-    - bash install-phpbolt.sh
-  script:
-    - php artisan obfuscate:check
-    - php artisan obfuscate:run --force
-  artifacts:
-    paths:
-      - build/obfuscated/
-      - build/obfuscation-report.json
-    expire_in: 1 week
+    stage: obfuscate
+    image: php:8.2
+    before_script:
+        - composer install --no-dev --optimize-autoloader
+        - bash install-phpbolt.sh
+    script:
+        - php artisan obfuscate:check
+        - php artisan obfuscate:run --force
+    artifacts:
+        paths:
+            - build/obfuscated/
+            - build/obfuscation-report.json
+        expire_in: 1 week
 ```
 
 ### Jenkins Pipeline Example
@@ -374,32 +378,32 @@ obfuscate:
 ```groovy
 pipeline {
     agent any
-    
+
     stages {
         stage('Install Dependencies') {
             steps {
                 sh 'composer install --no-dev --optimize-autoloader'
             }
         }
-        
+
         stage('Setup PHPBolt') {
             steps {
                 sh 'bash install-phpbolt.sh'
             }
         }
-        
+
         stage('Verify Configuration') {
             steps {
                 sh 'php artisan obfuscate:check'
             }
         }
-        
+
         stage('Obfuscate') {
             steps {
                 sh 'php artisan obfuscate:run --force'
             }
         }
-        
+
         stage('Archive Artifacts') {
             steps {
                 archiveArtifacts artifacts: 'build/obfuscated/**/*', fingerprint: true
@@ -440,9 +444,10 @@ Blade templates should generally not be obfuscated as they need to be parsed by 
 ### 3. Be Careful with Function/Class Scrambling
 
 Scrambling function and class names can break:
-- Reflection-based code
-- Dynamic method calls
-- External integrations
+
+-   Reflection-based code
+-   Dynamic method calls
+-   External integrations
 
 Start with these options disabled:
 
@@ -568,6 +573,7 @@ php artisan obfuscate:check --show-files
 ### Issues
 
 If you encounter any issues, please check:
+
 1. PHPBolt installation and configuration
 2. File permissions
 3. Configuration file settings
@@ -582,32 +588,31 @@ This package is open-sourced software licensed under the [MIT license](LICENSE).
 
 ## Credits
 
-- **Alexandru Florea** - Package Author
-- **PHPBolt** - Obfuscation Engine
-- Inspired by [jaydeepukani/laravel-source-obfuscator](https://github.com/jaydeepukani/Laravel-Source-Obfuscator) for command-line path override ideas
+-   **Alexandru Florea** - Package Author
+-   **PHPBolt** - Obfuscation Engine
+-   Inspired by [jaydeepukani/laravel-source-obfuscator](https://github.com/jaydeepukani/Laravel-Source-Obfuscator) for command-line path override ideas
 
 ## Changelog
 
 ### Version 1.0.0 (Initial Release)
 
-- PHPBolt integration
-- Configurable include/exclude paths
-- Four CLI commands (run, check, status, clear)
-- Automatic backup system
-- CI/CD support
-- Performance optimization options
-- Comprehensive reporting
+-   PHPBolt integration
+-   Configurable include/exclude paths
+-   Four CLI commands (run, check, status, clear)
+-   Automatic backup system
+-   CI/CD support
+-   Performance optimization options
+-   Comprehensive reporting
 
 ## Roadmap
 
-- [ ] Support for additional obfuscation engines
-- [ ] Web-based configuration UI
-- [ ] Real-time obfuscation monitoring
-- [ ] Integration with Laravel Forge
-- [ ] Docker support
-- [ ] Advanced scheduling options
+-   [ ] Support for additional obfuscation engines
+-   [ ] Web-based configuration UI
+-   [ ] Real-time obfuscation monitoring
+-   [ ] Integration with Laravel Forge
+-   [ ] Docker support
+-   [ ] Advanced scheduling options
 
 ---
 
 **Note:** PHPBolt is a commercial product. You need a valid PHPBolt license to use this package. This package is not affiliated with or endorsed by PHPBolt.
-
