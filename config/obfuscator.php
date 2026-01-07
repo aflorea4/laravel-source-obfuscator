@@ -43,7 +43,7 @@ return [
     | to your project root unless an absolute path is provided.
     |
     */
-    'output_dir' => env('OBFUSCATOR_OUTPUT_DIR', 'build/obfuscated'),
+    'output_dir' => env('OBFUSCATOR_OUTPUT_DIR', 'production/obfuscated'),
 
     /*
     |--------------------------------------------------------------------------
@@ -148,11 +148,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | Options for creating backups before obfuscation.
+    | Note: Backups are disabled by default. Use --backup flag to enable.
     |
     */
     'backup' => [
-        // Enable automatic backups
-        'enabled' => true,
+        // Enable automatic backups (disabled by default)
+        'enabled' => false,
 
         // Backup directory path
         'path' => env('OBFUSCATOR_BACKUP_DIR', 'backups/pre-obfuscation'),

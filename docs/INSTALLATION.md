@@ -108,7 +108,7 @@ PHPBOLT_PATH=/usr/lib/php/extensions/phpbolt.so
 PHPBOLT_BINARY=/usr/bin/phpbolt
 
 # Obfuscation output
-OBFUSCATOR_OUTPUT_DIR=build/obfuscated
+OBFUSCATOR_OUTPUT_DIR=production/obfuscated
 
 # Backup configuration
 OBFUSCATOR_BACKUP_DIR=backups/pre-obfuscation
@@ -270,7 +270,7 @@ sudo systemctl restart php-fpm
 
 ```bash
 # Create directories with proper permissions
-mkdir -p build/obfuscated
+mkdir -p production/obfuscated
 mkdir -p backups/pre-obfuscation
 chmod -R 775 build backups
 
@@ -328,7 +328,7 @@ composer remove alexandruflorea/laravel-source-obfuscator
 rm config/obfuscator.php
 
 # Clean up directories
-rm -rf build/obfuscated backups/pre-obfuscation
+rm -rf production/obfuscated backups/pre-obfuscation
 ```
 
 ## Support

@@ -81,7 +81,7 @@ PHPBOLT_PATH=/secure/path/to/phpbolt.so
 PHPBOLT_BINARY=/usr/local/bin/phpbolt
 
 # Restrict output paths
-OBFUSCATOR_OUTPUT_DIR=build/obfuscated
+OBFUSCATOR_OUTPUT_DIR=production/obfuscated
 ```
 
 ### 8. Production Deployment

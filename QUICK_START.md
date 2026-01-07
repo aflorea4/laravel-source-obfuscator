@@ -50,7 +50,7 @@ PHPBOLT_KEY=
 # Or set a specific key (min 6 characters)
 # PHPBOLT_KEY=your-secret-key
 
-OBFUSCATOR_OUTPUT_DIR=build/obfuscated
+OBFUSCATOR_OUTPUT_DIR=production/obfuscated
 ```
 
 ## Basic Usage
@@ -87,7 +87,7 @@ php artisan obfuscate:run
 
 **IMPORTANT:** Save the encryption key shown after obfuscation! You'll need it in production.
 
-Your obfuscated code will be in `build/obfuscated/`.
+Your obfuscated code will be in `production/obfuscated/`.
 
 ### Configure Production Environment
 
@@ -163,7 +163,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: obfuscated-app
-                  path: build/obfuscated/
+                  path: production/obfuscated/
 ```
 
 ## Commands Cheat Sheet
@@ -230,7 +230,7 @@ Error: Permission denied when creating output directory
 **Fix:**
 
 ```bash
-mkdir -p build/obfuscated backups
+mkdir -p production/obfuscated backups
 chmod -R 775 build backups
 ```
 
@@ -278,7 +278,7 @@ php artisan obfuscate:run --dry-run
 php artisan obfuscate:run
 
 # 5. Check results
-ls -la build/obfuscated/
+ls -la production/obfuscated/
 php artisan obfuscate:status --report
 ```
 
@@ -295,7 +295,7 @@ php artisan obfuscate:run --force
 php artisan obfuscate:status --report
 
 # 4. Deploy obfuscated code
-rsync -avz build/obfuscated/ user@server:/var/www/html/
+rsync -avz production/obfuscated/ user@server:/var/www/html/
 ```
 
 ## Next Steps

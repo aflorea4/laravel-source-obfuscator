@@ -2,6 +2,46 @@
 
 All notable changes to `laravel-source-obfuscator` will be documented in this file.
 
+## [1.0.5] - 2026-01-07
+
+### Changed
+- **BREAKING**: Changed default output directory from `build/obfuscated` to `production/obfuscated`
+- **BREAKING**: Backups are now disabled by default (opt-in instead of opt-out)
+- Changed `--skip-backup` flag to `--backup` flag (opt-in behavior)
+- Updated configuration: `backup.enabled` now defaults to `false`
+
+### Improved
+- Simplified workflow: No backup unless explicitly requested
+- Better CI/CD integration with cleaner defaults
+- Clearer command-line interface
+
+## [1.0.4] - 2026-01-07
+
+### Fixed
+- Fixed option name mismatch: `skip_backup` vs `skip-backup` in ObfuscateCommand
+
+## [1.0.3] - 2026-01-07
+
+### Fixed
+- Removed references to removed config keys (`encode_strings`, `encrypt`) from display configuration
+
+## [1.0.2] - 2026-01-07
+
+### Fixed
+- Removed custom `--verbose` option to avoid conflict with Laravel's built-in verbosity
+- Users can now use Laravel's native `-v`, `-vv`, `-vvv` options
+
+## [1.0.1] - 2026-01-07
+
+### Added
+- Support for Laravel 12
+- Support for Laravel 8
+- Support for PHP 7.4
+
+### Changed
+- Updated dependencies to support Laravel 8-12
+- Updated PHPUnit and Orchestra Testbench for broader compatibility
+
 ## [1.0.0] - 2026-01-05
 
 ### IMPORTANT - Implementation Corrected

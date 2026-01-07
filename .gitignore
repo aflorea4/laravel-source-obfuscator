@@ -1,4 +1,5 @@
 /vendor/
+/production/
 composer.lock
 .phpunit.result.cache
 .idea/

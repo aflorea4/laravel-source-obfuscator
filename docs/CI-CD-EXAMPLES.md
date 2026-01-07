@@ -65,7 +65,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: obfuscated-application-${{ github.sha }}
-          path: build/obfuscated/
+          path: production/obfuscated/
           retention-days: 30
 
       - name: Upload Obfuscation Report
@@ -136,7 +136,7 @@ jobs:
 
       - name: Package Obfuscated Application
         run: |
-          cd build/obfuscated
+          cd production/obfuscated
           tar -czf ../application.tar.gz .
 
       - name: Deploy to Production
@@ -212,7 +212,7 @@ obfuscate:
     - php artisan obfuscate:run --force
   artifacts:
     paths:
-      - build/obfuscated/
+      - production/obfuscated/
       - build/obfuscation-report.json
     expire_in: 1 week
   only:
@@ -230,7 +230,7 @@ deploy:production:
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - |
-      scp -r build/obfuscated/* ${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/html/
+      scp -r production/obfuscated/* ${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/html/
   only:
     - production
   when: manual
@@ -269,7 +269,7 @@ obfuscate:
     - php artisan obfuscate:run --force
   artifacts:
     paths:
-      - build/obfuscated/
+      - production/obfuscated/
 
 package:
   stage: package
@@ -337,7 +337,7 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'build/obfuscated/**/*', fingerprint: true
+                archiveArtifacts artifacts: 'production/obfuscated/**/*', fingerprint: true
                 archiveArtifacts artifacts: 'build/obfuscation-report.json', fingerprint: true
             }
         }
@@ -348,7 +348,7 @@ pipeline {
             }
             steps {
                 sh '''
-                    cd build/obfuscated
+                    cd production/obfuscated
                     tar -czf ../release.tar.gz .
                     scp ../release.tar.gz ${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/releases/${BUILD_NUMBER}/
                     ssh ${DEPLOY_USER}@${DEPLOY_HOST} "
@@ -416,7 +416,7 @@ pipelines:
             - php artisan obfuscate:check
             - php artisan obfuscate:run --force
           artifacts:
-            - build/obfuscated/**
+            - production/obfuscated/**
             - build/obfuscation-report.json
 
       - step:
@@ -428,7 +428,7 @@ pipelines:
                 USER: $DEPLOY_USER
                 SERVER: $DEPLOY_HOST
                 REMOTE_PATH: "/var/www/html"
-                LOCAL_PATH: "build/obfuscated/*"
+                LOCAL_PATH: "production/obfuscated/*"
 ```
 
 ---
@@ -498,7 +498,7 @@ jobs:
       - run:
           name: Deploy to Production
           command: |
-            cd build/obfuscated
+            cd production/obfuscated
             tar -czf ../release.tar.gz .
             scp ../release.tar.gz ${DEPLOY_USER}@${DEPLOY_HOST}:/var/www/releases/${CIRCLE_SHA1}/
 
@@ -582,3 +582,4 @@ php artisan obfuscate:clear --force
 ---
 
 **Need more examples?** Open an issue on GitHub with your CI/CD platform details.
+

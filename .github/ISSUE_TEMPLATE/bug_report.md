@@ -51,3 +51,4 @@ php artisan obfuscate:...
 - [ ] Configuration is published
 - [ ] Ran `php artisan obfuscate:check`
 
+

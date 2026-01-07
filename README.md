@@ -78,7 +78,7 @@ PHPBOLT_KEY=
 PHPBOLT_KEY=your-secret-key-here
 
 # Output directories
-OBFUSCATOR_OUTPUT_DIR=build/obfuscated
+OBFUSCATOR_OUTPUT_DIR=production/obfuscated
 OBFUSCATOR_BACKUP_DIR=backups/pre-obfuscation
 ```
 
@@ -207,20 +207,23 @@ php artisan obfuscate:run
 **Options:**
 
 -   `--source=path` - Override source paths (can be used multiple times: `--source=app --source=routes`)
--   `--destination=path` - Override output directory
+-   `--destination=path` - Override output directory (default: `production/obfuscated`)
 -   `--dry-run` - Simulate obfuscation without modifying files
--   `--skip-backup` - Skip creating a backup
+-   `--backup` - Create a backup before obfuscating (disabled by default)
 -   `--force` - Skip confirmation prompt
 -   `-v|vv|vvv` - Increase verbosity (Laravel built-in)
 
 **Examples:**
 
 ```bash
+# Basic obfuscation (no backup, default destination: production/obfuscated)
+php artisan obfuscate:run
+
 # Dry run to preview changes
 php artisan obfuscate:run --dry-run
 
-# Run without backup (not recommended)
-php artisan obfuscate:run --skip-backup
+# Create a backup before obfuscating
+php artisan obfuscate:run --backup
 
 # Run in CI/CD (non-interactive)
 php artisan obfuscate:run --force
@@ -231,8 +234,8 @@ php artisan obfuscate:run --source=app --source=routes
 # Override output directory
 php artisan obfuscate:run --destination=build/production
 
-# Combine options
-php artisan obfuscate:run --source=app --destination=dist --force
+# Combine options (with backup and custom destination)
+php artisan obfuscate:run --source=app --destination=dist --backup --force
 ```
 
 #### 2. Check Configuration
@@ -340,7 +343,7 @@ jobs:
               uses: actions/upload-artifact@v3
               with:
                   name: obfuscated-application
-                  path: build/obfuscated/
+                  path: production/obfuscated/
 
             - name: Upload Report
               uses: actions/upload-artifact@v3
@@ -368,7 +371,7 @@ obfuscate:
         - php artisan obfuscate:run --force
     artifacts:
         paths:
-            - build/obfuscated/
+            - production/obfuscated/
             - build/obfuscation-report.json
         expire_in: 1 week
 ```
@@ -406,7 +409,7 @@ pipeline {
 
         stage('Archive Artifacts') {
             steps {
-                archiveArtifacts artifacts: 'build/obfuscated/**/*', fingerprint: true
+                archiveArtifacts artifacts: 'production/obfuscated/**/*', fingerprint: true
                 archiveArtifacts artifacts: 'build/obfuscation-report.json', fingerprint: true
             }
         }
@@ -472,7 +475,7 @@ Always keep backups enabled:
 Add to `.gitignore`:
 
 ```
-/build/obfuscated/
+/production/obfuscated/
 /backups/
 build/obfuscation-report.json
 ```

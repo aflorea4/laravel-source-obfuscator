@@ -14,9 +14,9 @@ class ObfuscateCommand extends Command
      */
     protected $signature = 'obfuscate:run 
                             {--source=* : Override source paths to obfuscate (comma-separated or multiple --source options)}
-                            {--destination= : Override output directory}
+                            {--destination= : Override output directory (default: production/obfuscated)}
                             {--dry-run : Run without actually obfuscating files}
-                            {--skip-backup : Skip creating a backup}
+                            {--backup : Create a backup before obfuscating}
                             {--force : Force obfuscation without confirmation}';
 
     /**
@@ -80,7 +80,7 @@ class ObfuscateCommand extends Command
             // Build options with command-line overrides
             $options = [
                 'dry_run' => $this->option('dry-run') ?? false,
-                'skip_backup' => $this->option('skip-backup') ?? false,
+                'enable_backup' => $this->option('backup') ?? false,
             ];
 
             // Override source paths if provided

@@ -40,8 +40,8 @@ class ObfuscationService
             throw new \RuntimeException('PHPBolt extension (bolt.so) is not loaded. Please install and enable the bolt extension.');
         }
 
-        // Create backup if enabled
-        if ($this->config['backup']['enabled'] && !($options['skip_backup'] ?? false)) {
+        // Create backup if requested via --backup flag
+        if ($options['enable_backup'] ?? false) {
             $this->createBackup();
         }
 
