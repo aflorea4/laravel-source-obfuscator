@@ -269,15 +269,19 @@ php artisan obfuscate:run --production-ready --destination=dist/deploy --force
 #### What Gets Included/Excluded
 
 **Excluded by default:**
-- `.git/`, `.github/`, `node_modules/`, `tests/`
-- `.env` files, `.gitignore`, test configs
+- `.git/`, `.github/`, `tests/` - Version control and test files
+- `node_modules/`, `vendor/` - **Dependencies (install via npm/composer in production)**
+- `.env*` files - **Environment-specific (create in production)**
+- `composer.lock`, `package-lock.json` - Generated during install
 - Cache and log files from `storage/` and `bootstrap/cache/`
+- Development configs (`.editorconfig`, `phpunit.xml`, etc.)
 
 **Always included:**
-- `artisan`, `composer.json`, `public/index.php`
-- All vendor dependencies
-- Public assets, views, routes
-- Your obfuscated source code
+- `composer.json` - Required for `composer install --no-dev`
+- `package.json` - Required for `npm install --production` (if needed)
+- `artisan`, `public/index.php`, `server.php`
+- Your obfuscated source code (app/, routes/, etc.)
+- Views, config files, migrations, public assets
 
 **Configuration:** Edit `config/obfuscator.php` → `production_bundle` section to customize.
 
@@ -293,11 +297,19 @@ php artisan obfuscate:run \
   --force
 
 # Result: deploy/production/ contains:
-# - Complete Laravel application
+# - Complete Laravel application structure
 # - app/ directory is obfuscated
 # - routes/ directory is obfuscated
-# - Everything else is original (vendor, public, config, etc.)
-# - Ready to upload to your server!
+# - composer.json (for running: composer install --no-dev)
+# - Everything else except vendor/, node_modules/, .env
+#
+# Deploy to server:
+# 1. Upload deploy/production/ to server
+# 2. cd /var/www/html
+# 3. composer install --no-dev --optimize-autoloader
+# 4. npm install --production (if needed)
+# 5. cp .env.example .env && php artisan key:generate
+# 6. php artisan config:cache && php artisan route:cache
 ```
 
 #### 2. Check Configuration

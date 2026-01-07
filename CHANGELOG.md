@@ -4,11 +4,22 @@ All notable changes to `laravel-source-obfuscator` will be documented in this fi
 
 ## [1.1.1] - 2026-01-07
 
+### Changed
+- **BREAKING**: Production-ready bundle now excludes `vendor/` and `node_modules/` by default
+  - These should be installed in production via `composer install --no-dev` and `npm install --production`
+  - Bundle now includes `composer.json` and `package.json` for dependency installation
+  - Significantly reduces bundle size and follows Laravel best practices
+- Expanded exclusion list: `.env` variants, lock files, `.DS_Store`, etc.
+
 ### Fixed
 - Fixed production-ready bundle not copying all files correctly
 - Fixed output directory being deleted after bundle creation
 - Fixed recursion check in directory copy function
 - Removed debug logging output
+
+### Documentation
+- Updated deployment workflow examples
+- Added clear instructions for post-deployment dependency installation
 
 ## [1.1.0] - 2026-01-07
 
