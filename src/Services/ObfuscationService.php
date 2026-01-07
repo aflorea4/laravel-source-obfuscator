@@ -568,9 +568,14 @@ class ObfuscationService
      */
     protected function createProductionBundle(string $outputDir, array $options): void
     {
+        echo "\n🚀 Creating production-ready bundle...\n";
+        echo "Source: {$this->basePath}\n";
+        echo "Destination: {$outputDir}\n\n";
+        
         $this->log('info', 'Creating production-ready bundle');
 
         if ($options['dry_run'] ?? false) {
+            echo "Dry run mode - skipping copy\n";
             $this->log('info', 'Dry run: Skipping production bundle creation');
             return;
         }
@@ -581,6 +586,7 @@ class ObfuscationService
         $alwaysInclude = $this->config['production_bundle']['always_include'] ?? [];
 
         // Copy entire project structure
+        echo "Starting recursive copy...\n";
         $this->copyDirectoryRecursive(
             $this->basePath,
             $outputDir,
@@ -590,6 +596,7 @@ class ObfuscationService
             $alwaysInclude
         );
 
+        echo "✓ Production bundle created successfully\n\n";
         $this->log('info', 'Production bundle created successfully');
     }
 
