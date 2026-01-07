@@ -2,6 +2,24 @@
 
 All notable changes to `laravel-source-obfuscator` will be documented in this file.
 
+## [1.1.0] - 2026-01-07
+
+### Added
+- **Production-Ready Bundle Mode** (`--production-ready` flag)
+  - Creates a complete Laravel project with obfuscated files
+  - Perfect for deployment: copies entire project structure
+  - Only obfuscates specified directories (respects `--source` flags)
+  - Excludes unnecessary files (tests, node_modules, .git, cache, etc.)
+  - Configurable exclude/include lists in `config/obfuscator.php`
+- New config section: `production_bundle` with customizable exclusions
+- Smart directory copying with exclusion patterns
+- Always includes critical files (artisan, composer.json, public/index.php)
+
+### Improved
+- Better separation between obfuscated-only output and full project bundles
+- Enhanced CI/CD workflow support for production deployments
+- More flexible deployment options
+
 ## [1.0.5] - 2026-01-07
 
 ### Changed

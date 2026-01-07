@@ -218,5 +218,58 @@ return [
         // Timeout for each file obfuscation in seconds
         'timeout' => 60,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Production-Ready Bundle
+    |--------------------------------------------------------------------------
+    |
+    | Configure the production-ready bundle creation.
+    | When enabled with --production-ready flag, creates a complete Laravel
+    | project with obfuscated files in the destination directory.
+    |
+    */
+    'production_bundle' => [
+        // Directories to exclude from the production bundle
+        'exclude_dirs' => [
+            '.git',
+            '.github',
+            'node_modules',
+            'tests',
+            'storage/logs',
+            'storage/framework/cache',
+            'storage/framework/sessions',
+            'storage/framework/testing',
+            'storage/framework/views',
+            'bootstrap/cache',
+        ],
+
+        // Files to exclude from the production bundle
+        'exclude_files' => [
+            '.env',
+            '.env.example',
+            '.env.testing',
+            '.gitignore',
+            '.gitattributes',
+            '.editorconfig',
+            'phpunit.xml',
+            'phpunit.xml.dist',
+            'webpack.mix.js',
+            'vite.config.js',
+            'package.json',
+            'package-lock.json',
+            'composer.lock',
+            '.phpunit.result.cache',
+            'README.md',
+        ],
+
+        // Always copy these critical files (even if in exclude list)
+        'always_include' => [
+            'artisan',
+            'composer.json',
+            'public/index.php',
+            'server.php',
+        ],
+    ],
 ];
 

@@ -208,6 +208,7 @@ php artisan obfuscate:run
 
 -   `--source=path` - Override source paths (can be used multiple times: `--source=app --source=routes`)
 -   `--destination=path` - Override output directory (default: `production/obfuscated`)
+-   `--production-ready` - Create a complete Laravel project bundle with obfuscated files
 -   `--dry-run` - Simulate obfuscation without modifying files
 -   `--backup` - Create a backup before obfuscating (disabled by default)
 -   `--force` - Skip confirmation prompt
@@ -216,8 +217,11 @@ php artisan obfuscate:run
 **Examples:**
 
 ```bash
-# Basic obfuscation (no backup, default destination: production/obfuscated)
+# Basic obfuscation (only obfuscated files in output)
 php artisan obfuscate:run
+
+# Production-ready bundle (complete Laravel project with obfuscated files)
+php artisan obfuscate:run --production-ready
 
 # Dry run to preview changes
 php artisan obfuscate:run --dry-run
@@ -228,14 +232,72 @@ php artisan obfuscate:run --backup
 # Run in CI/CD (non-interactive)
 php artisan obfuscate:run --force
 
-# Override source paths (obfuscate only specific directories)
-php artisan obfuscate:run --source=app --source=routes
+# Production-ready with only specific directories obfuscated
+php artisan obfuscate:run --production-ready --source=app --source=routes
 
 # Override output directory
 php artisan obfuscate:run --destination=build/production
 
-# Combine options (with backup and custom destination)
-php artisan obfuscate:run --source=app --destination=dist --backup --force
+# Complete production bundle ready for deployment
+php artisan obfuscate:run --production-ready --destination=dist --force
+```
+
+### 🚀 Production-Ready Bundle Mode
+
+The `--production-ready` flag creates a **complete, deployable Laravel project** with obfuscated files. This is perfect for deployment scenarios where you want a ready-to-deploy directory.
+
+#### How It Works
+
+1. **Copies entire Laravel project** to the destination directory
+2. **Excludes unnecessary files** (tests, node_modules, .git, etc.)
+3. **Obfuscates specified files** (replaces originals with obfuscated versions)
+4. **Keeps everything else intact** (config files, public assets, vendor, etc.)
+
+#### Usage
+
+```bash
+# Create production-ready bundle (obfuscate all configured paths)
+php artisan obfuscate:run --production-ready
+
+# Production bundle with only specific directories obfuscated
+php artisan obfuscate:run --production-ready --source=app --source=routes
+
+# Complete CI/CD deployment package
+php artisan obfuscate:run --production-ready --destination=dist/deploy --force
+```
+
+#### What Gets Included/Excluded
+
+**Excluded by default:**
+- `.git/`, `.github/`, `node_modules/`, `tests/`
+- `.env` files, `.gitignore`, test configs
+- Cache and log files from `storage/` and `bootstrap/cache/`
+
+**Always included:**
+- `artisan`, `composer.json`, `public/index.php`
+- All vendor dependencies
+- Public assets, views, routes
+- Your obfuscated source code
+
+**Configuration:** Edit `config/obfuscator.php` → `production_bundle` section to customize.
+
+#### Example: Deploy-Ready Package
+
+```bash
+# Create production bundle ready for deployment
+php artisan obfuscate:run \
+  --production-ready \
+  --destination=deploy/production \
+  --source=app \
+  --source=routes \
+  --force
+
+# Result: deploy/production/ contains:
+# - Complete Laravel application
+# - app/ directory is obfuscated
+# - routes/ directory is obfuscated
+# - Everything else is original (vendor, public, config, etc.)
+# - Ready to upload to your server!
 ```
 
 #### 2. Check Configuration

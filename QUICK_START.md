@@ -83,11 +83,16 @@ This simulates obfuscation without modifying files.
 
 ```bash
 php artisan obfuscate:run
+
+# Or create a production-ready bundle (complete Laravel project)
+php artisan obfuscate:run --production-ready
 ```
 
 **IMPORTANT:** Save the encryption key shown after obfuscation! You'll need it in production.
 
 Your obfuscated code will be in `production/obfuscated/`.
+
+**💡 Tip:** Use `--production-ready` to create a complete, deployable Laravel project with obfuscated files instead of just the obfuscated files alone.
 
 ### Configure Production Environment
 

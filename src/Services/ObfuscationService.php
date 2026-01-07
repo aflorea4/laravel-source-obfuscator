@@ -67,6 +67,11 @@ class ObfuscationService
             : $this->pathResolver->resolve($this->config['output_dir']);
         $this->prepareOutputDirectory($outputDir);
 
+        // If production-ready mode, copy entire project first
+        if ($options['production_ready'] ?? false) {
+            $this->createProductionBundle($outputDir, $options);
+        }
+
         // Process files
         $stats = $this->processFiles($files, $outputDir, $options);
 
@@ -546,5 +551,128 @@ class ObfuscationService
     public function getEncryptionKey(): string
     {
         return $this->encryptionKey;
+    }
+
+    /**
+     * Create a production-ready bundle with the entire Laravel project.
+     *
+     * @param string $outputDir
+     * @param array $options
+     * @return void
+     */
+    protected function createProductionBundle(string $outputDir, array $options): void
+    {
+        $this->log('info', 'Creating production-ready bundle');
+
+        if ($options['dry_run'] ?? false) {
+            $this->log('info', 'Dry run: Skipping production bundle creation');
+            return;
+        }
+
+        // Get exclude lists from config
+        $excludeDirs = $this->config['production_bundle']['exclude_dirs'] ?? [];
+        $excludeFiles = $this->config['production_bundle']['exclude_files'] ?? [];
+        $alwaysInclude = $this->config['production_bundle']['always_include'] ?? [];
+
+        // Copy entire project structure
+        $this->copyDirectoryRecursive(
+            $this->basePath,
+            $outputDir,
+            $excludeDirs,
+            $excludeFiles,
+            $alwaysInclude
+        );
+
+        $this->log('info', 'Production bundle created successfully');
+    }
+
+    /**
+     * Recursively copy directory with exclusions.
+     *
+     * @param string $source
+     * @param string $destination
+     * @param array $excludeDirs
+     * @param array $excludeFiles
+     * @param array $alwaysInclude
+     * @return void
+     */
+    protected function copyDirectoryRecursive(
+        string $source,
+        string $destination,
+        array $excludeDirs = [],
+        array $excludeFiles = [],
+        array $alwaysInclude = []
+    ): void {
+        if (!is_dir($source)) {
+            return;
+        }
+
+        // Create destination directory if it doesn't exist
+        if (!is_dir($destination)) {
+            mkdir($destination, 0755, true);
+        }
+
+        $items = scandir($source);
+
+        foreach ($items as $item) {
+            if ($item === '.' || $item === '..') {
+                continue;
+            }
+
+            $sourcePath = $source . DIRECTORY_SEPARATOR . $item;
+            $destPath = $destination . DIRECTORY_SEPARATOR . $item;
+            $relativePath = str_replace($this->basePath . DIRECTORY_SEPARATOR, '', $sourcePath);
+
+            // Check if this is in always include list (takes priority)
+            $shouldAlwaysInclude = false;
+            foreach ($alwaysInclude as $alwaysPath) {
+                if ($relativePath === $alwaysPath || str_starts_with($relativePath, $alwaysPath . DIRECTORY_SEPARATOR)) {
+                    $shouldAlwaysInclude = true;
+                    break;
+                }
+            }
+
+            if ($shouldAlwaysInclude) {
+                if (is_dir($sourcePath)) {
+                    $this->copyDirectoryRecursive($sourcePath, $destPath, $excludeDirs, $excludeFiles, $alwaysInclude);
+                } else {
+                    copy($sourcePath, $destPath);
+                }
+                continue;
+            }
+
+            // Skip excluded directories
+            if (is_dir($sourcePath)) {
+                $shouldExclude = false;
+                foreach ($excludeDirs as $excludeDir) {
+                    if ($item === $excludeDir || $relativePath === $excludeDir || str_starts_with($relativePath, $excludeDir . DIRECTORY_SEPARATOR)) {
+                        $shouldExclude = true;
+                        break;
+                    }
+                }
+
+                // Skip the output directory itself to avoid recursion
+                if ($destPath === $destination || str_starts_with($destPath, $destination . DIRECTORY_SEPARATOR)) {
+                    $shouldExclude = true;
+                }
+
+                if (!$shouldExclude) {
+                    $this->copyDirectoryRecursive($sourcePath, $destPath, $excludeDirs, $excludeFiles, $alwaysInclude);
+                }
+            } else {
+                // Skip excluded files
+                $shouldExclude = false;
+                foreach ($excludeFiles as $excludeFile) {
+                    if ($item === $excludeFile || fnmatch($excludeFile, $item) || fnmatch($excludeFile, $relativePath)) {
+                        $shouldExclude = true;
+                        break;
+                    }
+                }
+
+                if (!$shouldExclude) {
+                    copy($sourcePath, $destPath);
+                }
+            }
+        }
     }
 }

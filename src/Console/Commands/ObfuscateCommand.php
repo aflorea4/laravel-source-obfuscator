@@ -15,6 +15,7 @@ class ObfuscateCommand extends Command
     protected $signature = 'obfuscate:run 
                             {--source=* : Override source paths to obfuscate (comma-separated or multiple --source options)}
                             {--destination= : Override output directory (default: production/obfuscated)}
+                            {--production-ready : Create a complete Laravel project bundle with obfuscated files}
                             {--dry-run : Run without actually obfuscating files}
                             {--backup : Create a backup before obfuscating}
                             {--force : Force obfuscation without confirmation}';
@@ -81,6 +82,7 @@ class ObfuscateCommand extends Command
             $options = [
                 'dry_run' => $this->option('dry-run') ?? false,
                 'enable_backup' => $this->option('backup') ?? false,
+                'production_ready' => $this->option('production-ready') ?? false,
             ];
 
             // Override source paths if provided
@@ -130,19 +132,26 @@ class ObfuscateCommand extends Command
         $config = config('obfuscator');
 
         $this->info('Configuration:');
-        $this->table(
-            ['Setting', 'Value'],
-            [
-                ['Output Directory', $config['output_dir']],
-                ['Include Paths', implode(', ', $config['include_paths'])],
-                ['Backup Enabled', $config['backup']['enabled'] ? 'Yes' : 'No'],
-                ['Strip Comments', $config['obfuscation']['strip_comments'] ? 'Yes' : 'No'],
-                ['Strip Whitespace', $config['obfuscation']['strip_whitespace'] ? 'Yes' : 'No'],
-            ]
-        );
+        $rows = [
+            ['Output Directory', $config['output_dir']],
+            ['Include Paths', implode(', ', $config['include_paths'])],
+            ['Backup Enabled', $config['backup']['enabled'] ? 'Yes' : 'No'],
+            ['Strip Comments', $config['obfuscation']['strip_comments'] ? 'Yes' : 'No'],
+            ['Strip Whitespace', $config['obfuscation']['strip_whitespace'] ? 'Yes' : 'No'],
+        ];
+
+        if ($this->option('production-ready')) {
+            $rows[] = ['Production Bundle', 'Yes (Complete Laravel project)'];
+        }
+
+        $this->table(['Setting', 'Value'], $rows);
 
         if ($this->option('dry-run')) {
             $this->warn('DRY RUN MODE: No files will be modified');
+        }
+
+        if ($this->option('production-ready')) {
+            $this->info('🚀 Production-Ready Mode: Creating complete Laravel project bundle');
         }
 
         $this->newLine();
