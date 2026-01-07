@@ -69,9 +69,14 @@ class ObfuscationService
         // If production-ready mode, copy entire project first (before preparing output dir)
         if ($options['production_ready'] ?? false) {
             $this->createProductionBundle($outputDir, $options);
+            // In production-ready mode, don't delete the output directory
+            // Just ensure it exists (it should from the copy above)
+            if (!is_dir($outputDir)) {
+                mkdir($outputDir, 0755, true);
+            }
+        } else {
+            $this->prepareOutputDirectory($outputDir);
         }
-
-        $this->prepareOutputDirectory($outputDir);
 
         // Process files
         $stats = $this->processFiles($files, $outputDir, $options);
