@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-source-obfuscator` will be documented in this file.
 
+## [1.1.1] - 2026-01-07
+
+### Fixed
+- Fixed production-ready bundle not copying all files correctly
+- Fixed output directory being deleted after bundle creation
+- Fixed recursion check in directory copy function
+- Removed debug logging output
+
 ## [1.1.0] - 2026-01-07
 
 ### Added
