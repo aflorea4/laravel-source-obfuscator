@@ -578,6 +578,7 @@ class ObfuscationService
         $this->copyDirectoryRecursive(
             $this->basePath,
             $outputDir,
+            $outputDir, // Pass original output dir to prevent recursion
             $excludeDirs,
             $excludeFiles,
             $alwaysInclude
@@ -591,6 +592,7 @@ class ObfuscationService
      *
      * @param string $source
      * @param string $destination
+     * @param string $outputRoot Original output directory root (to prevent recursion)
      * @param array $excludeDirs
      * @param array $excludeFiles
      * @param array $alwaysInclude
@@ -599,6 +601,7 @@ class ObfuscationService
     protected function copyDirectoryRecursive(
         string $source,
         string $destination,
+        string $outputRoot,
         array $excludeDirs = [],
         array $excludeFiles = [],
         array $alwaysInclude = []
@@ -634,7 +637,7 @@ class ObfuscationService
 
             if ($shouldAlwaysInclude) {
                 if (is_dir($sourcePath)) {
-                    $this->copyDirectoryRecursive($sourcePath, $destPath, $excludeDirs, $excludeFiles, $alwaysInclude);
+                    $this->copyDirectoryRecursive($sourcePath, $destPath, $outputRoot, $excludeDirs, $excludeFiles, $alwaysInclude);
                 } else {
                     copy($sourcePath, $destPath);
                 }
@@ -652,12 +655,12 @@ class ObfuscationService
                 }
 
                 // Skip the output directory itself to avoid recursion
-                if ($sourcePath === $destination || str_starts_with($sourcePath, $destination . DIRECTORY_SEPARATOR)) {
+                if ($sourcePath === $outputRoot || str_starts_with($sourcePath, $outputRoot . DIRECTORY_SEPARATOR)) {
                     $shouldExclude = true;
                 }
 
                 if (!$shouldExclude) {
-                    $this->copyDirectoryRecursive($sourcePath, $destPath, $excludeDirs, $excludeFiles, $alwaysInclude);
+                    $this->copyDirectoryRecursive($sourcePath, $destPath, $outputRoot, $excludeDirs, $excludeFiles, $alwaysInclude);
                 }
             } else {
                 // Skip excluded files
