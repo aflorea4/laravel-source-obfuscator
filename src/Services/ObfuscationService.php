@@ -568,14 +568,9 @@ class ObfuscationService
      */
     protected function createProductionBundle(string $outputDir, array $options): void
     {
-        echo "\n🚀 Creating production-ready bundle...\n";
-        echo "Source: {$this->basePath}\n";
-        echo "Destination: {$outputDir}\n\n";
-        
         $this->log('info', 'Creating production-ready bundle');
 
         if ($options['dry_run'] ?? false) {
-            echo "Dry run mode - skipping copy\n";
             $this->log('info', 'Dry run: Skipping production bundle creation');
             return;
         }
@@ -586,7 +581,6 @@ class ObfuscationService
         $alwaysInclude = $this->config['production_bundle']['always_include'] ?? [];
 
         // Copy entire project structure
-        echo "Starting recursive copy...\n";
         $this->copyDirectoryRecursive(
             $this->basePath,
             $outputDir,
@@ -596,7 +590,6 @@ class ObfuscationService
             $alwaysInclude
         );
 
-        echo "✓ Production bundle created successfully\n\n";
         $this->log('info', 'Production bundle created successfully');
     }
 
@@ -663,7 +656,6 @@ class ObfuscationService
                 foreach ($excludeDirs as $excludeDir) {
                     if ($item === $excludeDir || $relativePath === $excludeDir || str_starts_with($relativePath, $excludeDir . DIRECTORY_SEPARATOR)) {
                         $shouldExclude = true;
-                        $this->log('info', "Excluding directory (config): $relativePath");
                         break;
                     }
                 }
@@ -671,14 +663,10 @@ class ObfuscationService
                 // Skip the output directory itself to avoid recursion
                 if ($sourcePath === $outputRoot || str_starts_with($sourcePath, $outputRoot . DIRECTORY_SEPARATOR)) {
                     $shouldExclude = true;
-                    $this->log('info', "Excluding directory (output root): $relativePath");
                 }
 
                 if (!$shouldExclude) {
-                    $this->log('info', "Copying directory: $relativePath");
                     $this->copyDirectoryRecursive($sourcePath, $destPath, $outputRoot, $excludeDirs, $excludeFiles, $alwaysInclude);
-                } else {
-                    $this->log('info', "Skipped directory: $relativePath");
                 }
             } else {
                 // Skip excluded files

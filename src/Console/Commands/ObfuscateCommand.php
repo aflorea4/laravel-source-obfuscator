@@ -84,12 +84,6 @@ class ObfuscateCommand extends Command
                 'enable_backup' => $this->option('backup') ?? false,
                 'production_ready' => $this->option('production-ready') ?? false,
             ];
-            
-            // Debug output
-            if ($this->option('production-ready')) {
-                $this->info('✓ Production-ready mode is ENABLED');
-                $this->info('Options array: ' . json_encode($options));
-            }
 
             // Override source paths if provided
             if ($this->option('source')) {
