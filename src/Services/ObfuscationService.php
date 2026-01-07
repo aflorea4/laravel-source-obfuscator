@@ -652,7 +652,7 @@ class ObfuscationService
                 }
 
                 // Skip the output directory itself to avoid recursion
-                if ($destPath === $destination || str_starts_with($destPath, $destination . DIRECTORY_SEPARATOR)) {
+                if ($sourcePath === $destination || str_starts_with($sourcePath, $destination . DIRECTORY_SEPARATOR)) {
                     $shouldExclude = true;
                 }
 
