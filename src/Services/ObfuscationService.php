@@ -650,7 +650,7 @@ class ObfuscationService
                 foreach ($excludeDirs as $excludeDir) {
                     if ($item === $excludeDir || $relativePath === $excludeDir || str_starts_with($relativePath, $excludeDir . DIRECTORY_SEPARATOR)) {
                         $shouldExclude = true;
-                        $this->log('debug', "Excluding directory (config): $relativePath");
+                        $this->log('info', "Excluding directory (config): $relativePath");
                         break;
                     }
                 }
@@ -658,14 +658,14 @@ class ObfuscationService
                 // Skip the output directory itself to avoid recursion
                 if ($sourcePath === $outputRoot || str_starts_with($sourcePath, $outputRoot . DIRECTORY_SEPARATOR)) {
                     $shouldExclude = true;
-                    $this->log('debug', "Excluding directory (output root): $relativePath");
+                    $this->log('info', "Excluding directory (output root): $relativePath");
                 }
 
                 if (!$shouldExclude) {
-                    $this->log('debug', "Copying directory: $relativePath");
+                    $this->log('info', "Copying directory: $relativePath");
                     $this->copyDirectoryRecursive($sourcePath, $destPath, $outputRoot, $excludeDirs, $excludeFiles, $alwaysInclude);
                 } else {
-                    $this->log('debug', "Skipped directory: $relativePath");
+                    $this->log('info', "Skipped directory: $relativePath");
                 }
             } else {
                 // Skip excluded files
