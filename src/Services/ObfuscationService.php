@@ -65,12 +65,13 @@ class ObfuscationService
         $outputDir = isset($options['destination_override']) 
             ? $this->pathResolver->resolve($options['destination_override'])
             : $this->pathResolver->resolve($this->config['output_dir']);
-        $this->prepareOutputDirectory($outputDir);
 
-        // If production-ready mode, copy entire project first
+        // If production-ready mode, copy entire project first (before preparing output dir)
         if ($options['production_ready'] ?? false) {
             $this->createProductionBundle($outputDir, $options);
         }
+
+        $this->prepareOutputDirectory($outputDir);
 
         // Process files
         $stats = $this->processFiles($files, $outputDir, $options);
