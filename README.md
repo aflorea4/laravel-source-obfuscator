@@ -285,6 +285,8 @@ php artisan obfuscate:run --production-ready --destination=dist/deploy --force
 
 **Configuration:** Edit `config/obfuscator.php` → `production_bundle` section to customize.
 
+**📖 Full Deployment Guide:** See [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md) for complete step-by-step deployment instructions.
+
 #### Example: Deploy-Ready Package
 
 ```bash
